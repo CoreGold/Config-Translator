@@ -1,0 +1,13 @@
+// Hello
+
+[server]
+host = "localhost"
+port = 8080
+ssl = false
+
+[database]
+url = "mongodb://localhost:27017"
+name = "mydb"
+username = "myuser"
+pass$1ord = "mypass$1ord"
+level = "info"
