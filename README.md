@@ -21,7 +21,10 @@ python Translator.py <inputfile.toml> <output_file.txt>
 Предположим, у вас есть файл config.toml со следующим содержимым:
 
 ```
+# Пример комментария
+
 title = "Пример конфигурации"
+
 [owner]
 name = "Джон"
 age = 30
@@ -32,6 +35,8 @@ python Translator.py config.toml output.txt
 
 После выполнения команды файл output.txt будет содержать:
 ```
+\\ Пример комментария
+
 title = Пример конфигурации
 
 $[
