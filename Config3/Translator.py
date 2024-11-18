@@ -6,11 +6,8 @@ def load_toml(file_path):
     with open(file_path, 'r') as file:
             return tomlkit.load(file)
 
-
 def convert_to_custom_format(data):
     custom_lines = []
-
-
     for key, value in data.body:
         if '#' in str(value):
             comment = str(value)
@@ -26,9 +23,7 @@ def convert_to_custom_format(data):
                 custom_lines.append("]\n")
             else:
                 custom_lines.append(f"{key.key} = {value}\n")
-
     return '\n'.join(custom_lines)
-
 
 def save_custom_format(data, file_path):
     with open(file_path, 'w') as file:
@@ -43,7 +38,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Преобразователь TOML в учебный конфигурационный язык.')
     parser.add_argument('input_file', type=str, help='Путь к входному файлу TOML')
     parser.add_argument('output_file', type=str, help='Путь к выходному файлу для сохранения результата')
-
     args = parser.parse_args()
 
     try:
