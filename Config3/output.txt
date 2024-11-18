@@ -1,13 +1,17 @@
 // Hello
 
-[server]
-host = "localhost"
-port = 8080
-ssl = false
+title = test
 
-[database]
-url = "mongodb://localhost:27017"
-name = "mydb"
-username = "myuser"
-pass$1ord = "mypass$1ord"
-level = "info"
+$[
+  host: localhost 
+  port: 8080 
+  ssl: False 
+]
+
+$[
+  url: mongodb://localhost:27017 
+  name: mydb 
+  username: myuser 
+  password: mypassword 
+  level: info 
+]

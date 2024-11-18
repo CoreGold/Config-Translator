@@ -1,88 +1,53 @@
+import tomlkit
 import argparse
-import re
-import tomllib
-from typing import Any, Dict
 
-def toml_to_study_language(toml_text, toml_file):
-    # Функция для обработки словарей
-    a = 1
-    def convert_dict(dict):
-        items = []
-        for key, value in dict.items():
+
+def load_toml(file_path):
+    with open(file_path, 'r') as file:
+            return tomlkit.load(file)
+
+
+def convert_to_custom_format(data):
+    custom_lines = []
+
+
+    for key, value in data.body:
+        if '#' in str(value):
+            comment = str(value)
+            if '#' in comment:
+                comment_new = f"// {comment[1:]}\n"
+                custom_lines.append(comment_new)
+
+        elif key != None:
             if isinstance(value, dict):
-                items.append(f"{key} : ${{{convert_dict(value)}}}")
+                custom_lines.append(f"$[")
+                for sub_key, sub_value in value.items():
+                    custom_lines.append(f"  {sub_key}: {sub_value} ")
+                custom_lines.append("]\n")
             else:
-                items.append(f"{key} : {value}")
-        return "$[" + ", ".join(items) + "]"
+                custom_lines.append(f"{key.key} = {value}\n")
 
-    print(convert_dict(toml_file))
-
-    # Замена однострочных комментариев
-    toml_text = re.sub(r'#(.*)', lambda m: r'//' + m.group(1), toml_text)
-
-    #toml_text = re.sub(r'#|(.*?)|#', lambda m: '|#n' + m.group(1).strip() + 'n#|', toml_text)
+    return '\n'.join(custom_lines)
 
 
-    # Словарь для хранения констант
-    constants = {}
+def save_custom_format(data, file_path):
+    with open(file_path, 'w') as file:
+        file.write(data)
 
-    # Возвращаем преобразованный текст
-    return toml_text.strip()
+def main(input_file, output_file):
+    toml_data = load_toml(input_file)
+    custom_format_data = convert_to_custom_format(toml_data)
+    save_custom_format(custom_format_data, output_file)
 
-
-def evaluate_expression(expression: str, constants: Dict[str, Any]) -> Any:
-    # Заменяем имена констант на их значения
-    for name in constants:
-        expression = expression.replace(name, constants[name])
-
-    # Поддерживаем базовые операции: сложение и функции max(), mod()
-    try:
-        # Обработка max() функции
-        expression = re.sub(r'max(([^)]+))', lambda m: str(max(map(int, m.group(1).split(',')))), expression)
-
-        # Обработка mod() функции
-        expression = re.sub(r'mod(([^)]+))',
-                            lambda m: str(int(m.group(1).split(',')[0]) % int(m.group(1).split(',')[1])), expression)
-
-        # Выполнение простого сложения
-        result = eval(expression)
-        return result
-    except Exception as e:
-        return f"Ошибка вычисления: {e}"
-
-
-def main():
-    parser = argparse.ArgumentParser(description='Convert TOML to custom configuration language.')
-    parser.add_argument('input_file', help='Path to the input TOML file')
-    parser.add_argument('output_file', help='Path to the output configuration file')
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Преобразователь TOML в учебный конфигурационный язык.')
+    parser.add_argument('input_file', type=str, help='Путь к входному файлу TOML')
+    parser.add_argument('output_file', type=str, help='Путь к выходному файлу для сохранения результата')
 
     args = parser.parse_args()
 
     try:
-        with open(args.input_file, 'r', encoding='utf-8') as infile:
-            toml_content = infile.read()
-        with open(args.input_file, 'rb') as f:
-            toml_file = tomllib.load(f)
-
-        transformed_content = toml_to_study_language(toml_content, toml_file)
-
-
-
-
-
-
-
-
-
-        with open(args.output_file, 'w', encoding='utf-8') as outfile:
-            outfile.write(transformed_content)
-
-        print(f"Conversion successful. Output written to {args.output_file}")
-    except FileNotFoundError:
-        print(f"Error: File {args.input_file} not found.")
+        main(args.input_file, args.output_file)
+        print(f"Успешно преобразовано: {args.input_file} -> {args.output_file}")
     except Exception as e:
-        print(f"An error occurred: {e}")
-
-
-if __name__ == '__main__':
-    main()
+        print(f"Ошибка: {e}")
