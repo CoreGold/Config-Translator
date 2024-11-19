@@ -12,18 +12,37 @@ def convert_to_custom_format(data):
         if '#' in str(value):
             comment = str(value)
             if '#' in comment:
-                comment_new = f"// {comment[1:]}\n"
+                comment_new = f"//{comment[1:]}\n"
                 custom_lines.append(comment_new)
 
-        elif key != None:
-            if isinstance(value, dict):
-                custom_lines.append(f"$[")
-                for sub_key, sub_value in value.items():
-                    custom_lines.append(f"  {sub_key}: {sub_value} ")
-                custom_lines.append("]\n")
-            else:
-                custom_lines.append(f"{key.key} = {value}\n")
+        if isinstance(value, int) or isinstance(value, dict) or isinstance(value, list):
+            if key != None:
+                if isinstance(value, list):
+                    value = value.value[0].value
+                if isinstance(value, dict):
+                    custom_lines.append(f"$[")
+                    for sub_key, sub_value in value.items():
+                        if isinstance(sub_value, list):
+                            deep = 2
+                            custom_lines = sub_list_translator(sub_value, custom_lines, deep)
+                        if isinstance(sub_value, int) and not isinstance(sub_value, bool):
+                            custom_lines.append(f"  {sub_key}: {sub_value} ")
+                    custom_lines.append("]\n")
+                else:
+                    custom_lines.append(f"{key.key} = {value}\n")
     return '\n'.join(custom_lines)
+
+def sub_list_translator(sub_value, custom_lines, deep):
+    for sub_list in sub_value:
+        custom_lines.append('\n' + deep*' ' + "$[")
+        for sub_sub_key, sub_sub_value in sub_list.items():
+            if isinstance(sub_sub_value, list):
+                sub_sub_value = sub_sub_value.value
+                custom_lines = sub_list_translator(sub_sub_value, custom_lines, deep+2)
+            if isinstance(sub_sub_value, int) and not isinstance(sub_sub_value, bool):
+                custom_lines.append(f"    {sub_sub_key}: {sub_sub_value} ")
+        custom_lines.append(deep*' ' + "]")
+    return custom_lines
 
 def save_custom_format(data, file_path):
     with open(file_path, 'w') as file:

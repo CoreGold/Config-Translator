@@ -1,16 +1,22 @@
 #Hello
 #Hello2
 
-title = 'test'
+title = "test"
+
+[[emloyees]]
+id = 213
+name = "franc"
+  [[emloyees.others]]
+  department = "sales"
+  did = 1
+    [[emloyees.others.test]]
+    k = 2
+    [[emloyees.others.test]]
+    kk = 3
+  [[emloyees.others]]
+  salary = 5_000
 
 [server]
 host = "localhost"
 port = 8080
 ssl = false
-
-[database]
-url = "mongodb://localhost:27017"
-name = "mydb"
-username = "myuser"
-password = "mypassword"
-level = "info"
