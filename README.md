@@ -62,6 +62,7 @@ ssl = 1
 python Translator.py config.toml output.txt
 
 После выполнения команды файл output.txt будет содержать:
+
 Комментарии.
 ```
 //Hello
