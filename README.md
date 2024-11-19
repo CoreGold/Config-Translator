@@ -34,8 +34,9 @@ python Translator.py <inputfile.toml> <output_file.txt>
 #Hello2
 
 title = 1
-
 title2 = '?{title + 5}'
+title3 = "test"
+
 [[emloyees]]
 id = 213
 name = "franc"
@@ -48,8 +49,6 @@ name = "franc"
     kk = 3
   [[emloyees.others]]
   salary = 5_000
-
-title3 = "test"
 
 [server]
 host = "localhost"
