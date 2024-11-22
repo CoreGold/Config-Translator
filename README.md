@@ -102,19 +102,51 @@ $[
 
 Кроме этого, готовые тесты-программы и готовые тестовые файлы предложены в Test_Translator.py
 
-### Примеры работы преобразователя
-## 1. Конфигурационный файл настроек компьютерной игры
+# Примеры работы преобразователя
+### 1. Пользователи сети
 
 Toml
 ```
+[users]
 
+[[users.admin]]
+id = 1
+max_permissions_level = 10
+session_timeout_minutes = 30
+
+[[users.guest]]
+id = 2
+max_permissions_level = 1
+session_timeout_minutes = 5
+
+[[users.moderator]]
+id = 3
+max_permissions_level = 5
+session_timeout_minutes = 15
 ```
 
 Учебный конфигурационный язык
 ```
-
+$[
+  $[
+    id: 1 
+    max_permissions_level: 10 
+    session_timeout_minutes: 30 
+  ]
+  $[
+    id: 2 
+    max_permissions_level: 1 
+    session_timeout_minutes: 5 
+  ]
+  $[
+    id: 3 
+    max_permissions_level: 5 
+    session_timeout_minutes: 15 
+  ]
+]
 ```
-## 2. Конфигурационный файл 
+
+### 2. Настройки компьютерной игры 
 
 Toml
 ```
@@ -153,5 +185,53 @@ $[
   mute_audio: 0 
 ]
 ```
+### 3. Настройки сервера
 
+Toml
+```
+[server]
+ip_part1 = 127
+ip_part2 = 0
+ip_part3 = 0
+ip_part4 = 1
+port = 8080
+https_enabled = 1  
 
+[logging]
+log_level = 2  
+log_to_file = 1  
+
+[database]
+db_type_id = 1  
+db_host_ip_part1 = 192
+db_host_ip_part2 = 168
+db_host_ip_part3 = 1
+db_host_ip_part4 = 10
+db_port = 5432
+```
+
+Учебный конфигурационный язык
+```
+$[
+  ip_part1: 127 
+  ip_part2: 0 
+  ip_part3: 0 
+  ip_part4: 1 
+  port: 8080 
+  https_enabled: 1 
+]
+
+$[
+  log_level: 2 
+  log_to_file: 1 
+]
+
+$[
+  db_type_id: 1 
+  db_host_ip_part1: 192 
+  db_host_ip_part2: 168 
+  db_host_ip_part3: 1 
+  db_host_ip_part4: 10 
+  db_port: 5432 
+]
+```
