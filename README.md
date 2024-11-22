@@ -103,12 +103,55 @@ $[
 Кроме этого, готовые тесты-программы и готовые тестовые файлы предложены в Test_Translator.py
 
 ### Примеры работы преобразователя
-* 1. Конфигурационный файл настроек компьютерной игры
+## 1. Конфигурационный файл настроек компьютерной игры
 
 Toml
-![изображение](https://github.com/user-attachments/assets/3af03157-ac54-432f-8c77-5a56d51f6ad8)
+```
+
+```
 
 Учебный конфигурационный язык
-![изображение](https://github.com/user-attachments/assets/d3a23f60-a8e9-4137-bfca-96cdbbd795df)
+```
+
+```
+## 2. Конфигурационный файл 
+
+Toml
+```
+#Game Settings
+
+[graphics]
+resolution_width = 1920
+resolution_height = 1080
+fullscreen_mode = 1
+vsync_enabled = 0
+anti_aliasing_level = 4
+
+[audio]
+volume_master = 80
+volume_music = 50
+volume_effects = 70
+mute_audio = 0
+```
+
+Учебный конфигурационный язык
+```
+//Game Settings
+
+$[
+  resolution_width: 1920 
+  resolution_height: 1080 
+  fullscreen_mode: 1 
+  vsync_enabled: 0 
+  anti_aliasing_level: 4 
+]
+
+$[
+  volume_master: 80 
+  volume_music: 50 
+  volume_effects: 70 
+  mute_audio: 0 
+]
+```
 
 
