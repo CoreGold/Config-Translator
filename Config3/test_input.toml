@@ -1,25 +1,3 @@
-#Hello
-#Hello2
-
-title = 1
-
-title2 = '?{title + 5}'
-[[emloyees]]
-id = 213
-name = "franc"
-  [[emloyees.others]]
-  department = "sales"
-  did = 1
-    [[emloyees.others.test]]
-    k = '?{did max 99}'
-    [[emloyees.others.test]]
-    kk = 3
-  [[emloyees.others]]
-  salary = 5_000
-
-title3 = "test"
-
-[server]
-host = "localhost"
-port = 8080
-ssl = 1
+Test1 = 1
+Test2 = 'string'
+Test3 = true

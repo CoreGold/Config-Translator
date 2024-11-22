@@ -1,25 +1,16 @@
-#Hello
-#Hello2
+#Game Settings
 
-title = 1
+[graphics]
+resolution_width = 1920
+resolution_height = 1080
+fullscreen_mode = 1
+vsync_enabled = 0
+anti_aliasing_level = 4
 
-title2 = '?{title + 5}'
-[[emloyees]]
-id = 213
-name = "franc"
-  [[emloyees.others]]
-  department = "sales"
-  did = 1
-    [[emloyees.others.test]]
-    k = '?{did max 99}'
-    [[emloyees.others.test]]
-    kk = 3
-  [[emloyees.others]]
-  salary = 5_000
+[audio]
+volume_master = 80
+volume_music = 50
+volume_effects = 70
+mute_audio = 0
 
-title3 = "test"
 
-[server]
-host = "localhost"
-port = 8080
-ssl = 1

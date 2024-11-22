@@ -1,28 +1,17 @@
-//Hello
-
-//Hello2
-
-title = 1
-
-title2 = 6
+//Game Settings
 
 $[
-  id: 213 
-  $[
-    did: 1 
-    $[
-    k: 99 
-    ]
-    $[
-    kk: 3 
-    ]
-  ]
-  $[
-    salary: 5000 
-  ]
+  resolution_width: 1920 
+  resolution_height: 1080 
+  fullscreen_mode: 1 
+  vsync_enabled: 0 
+  anti_aliasing_level: 4 
 ]
 
 $[
-  port: 8080 
-  ssl: 1 
+  volume_master: 80 
+  volume_music: 50 
+  volume_effects: 70 
+  mute_audio: 0 
 ]
+
