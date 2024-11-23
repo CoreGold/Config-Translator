@@ -1,16 +1,21 @@
-#Game Settings
+[server]
+ip_part1 = 127
+ip_part2 = 0
+ip_part3 = 0
+ip_part4 = 1
+port = 8080
+https_enabled = 1
 
-[graphics]
-resolution_width = 1920
-resolution_height = 1080
-fullscreen_mode = 1
-vsync_enabled = 0
-anti_aliasing_level = 4
+[logging]
+log_level = 2
+log_to_file = 1
 
-[audio]
-volume_master = 80
-volume_music = 50
-volume_effects = 70
-mute_audio = 0
+[database]
+db_type_id = 1
+db_host_ip_part1 = 192
+db_host_ip_part2 = 168
+db_host_ip_part3 = 1
+db_host_ip_part4 = 10
+db_port = 5432
 
 
